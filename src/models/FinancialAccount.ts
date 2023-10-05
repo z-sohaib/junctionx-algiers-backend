@@ -17,6 +17,7 @@ const FinancialAccountSchema = new mongoose.Schema(
     number: {
       type: String,
       required: true,
+      unique: true,
     },
     name: {
       type: String,
