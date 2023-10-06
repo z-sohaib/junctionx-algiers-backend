@@ -5,6 +5,7 @@ import users from "./users.js";
 import expenseCategories from "./expense-categories.js";
 import recommendations from "./recommendations.js";
 import logs from "./logs.js";
+import financialAccounts from "./fin-accounts.js";
 
 const router = Router();
 
@@ -14,6 +15,7 @@ export default (): Router => {
   expenseCategories(router);
   recommendations(router);
   logs(router);
+  financialAccounts(router);
 
   return router;
 };
