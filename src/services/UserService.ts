@@ -70,3 +70,39 @@ export const deleteUser = async (id: string) => {
     };
   }
 };
+
+export const addToTotalCash = async (id: string, amount: number) => {
+  try {
+    const user = await User.findById(id);
+    user.cash = user.cash + amount;
+    await user.save();
+    return {
+      success: true,
+      data: user,
+    };
+  } catch (err) {
+    console.log(err.message);
+    return {
+      success: false,
+      data: err.message,
+    };
+  }
+};
+
+export const subFromTotalCash = async (id: string, amount: number) => {
+  try {
+    const user = await User.findById(id);
+    user.cash = user.cash - amount;
+    await user.save();
+    return {
+      success: true,
+      data: user,
+    };
+  } catch (err) {
+    console.log(err.message);
+    return {
+      success: false,
+      data: err.message,
+    };
+  }
+};

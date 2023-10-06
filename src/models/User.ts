@@ -49,6 +49,11 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: null,
     },
+    cash: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
   },
   {
     timestamps: true,

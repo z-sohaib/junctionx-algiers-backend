@@ -9,6 +9,7 @@ import {
   deleteTransaction,
 } from "../services/TransactionService.js";
 import { UserInterface } from "../models/User.js";
+import { addToTotalCash, subFromTotalCash } from "../services/UserService.js";
 
 interface AuthRequest extends Request {
   user: UserInterface;
@@ -76,6 +77,11 @@ export const createOneHandler = async (req: AuthRequest, res: Response) => {
       data: null,
     });
   } else {
+    if (isSpend) {
+      subFromTotalCash(_id, amount);
+    } else {
+      addToTotalCash(_id, amount);
+    }
     res.status(200).json({
       success: true,
       message: "Transaction created successfully",
@@ -103,6 +109,18 @@ export const updateOneHandler = async (req: Request, res: Response) => {
       data: null,
     });
   } else {
+    if (data.data.isSpend) {
+      addToTotalCash(data.data._id, data.data.amount);
+    } else {
+      subFromTotalCash(data.data._id, data.data.amount);
+    }
+
+    if (isSpend) {
+      subFromTotalCash(data.data._id, amount);
+    } else {
+      addToTotalCash(data.data._id, amount);
+    }
+
     res.status(200).json({
       success: true,
       message: "Transaction updated successfully",
