@@ -29,3 +29,44 @@ export const getUserByEmail = async (email: string) => {
     return null;
   }
 };
+
+export const updateUser = async (
+  id: string,
+  name: string | null,
+  email: string | null,
+  telephone: string | null
+) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(id, {
+      name,
+      email,
+      telephone,
+    });
+    return {
+      success: true,
+      data: updatedUser,
+    };
+  } catch (err) {
+    console.log(err.message);
+    return {
+      success: false,
+      data: err.message,
+    };
+  }
+};
+
+export const deleteUser = async (id: string) => {
+  try {
+    const deletedUser = await User.findByIdAndDelete(id);
+    return {
+      success: true,
+      data: deletedUser,
+    };
+  } catch (err) {
+    console.log(err.message);
+    return {
+      success: false,
+      data: err.message,
+    };
+  }
+};
