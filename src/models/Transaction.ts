@@ -22,6 +22,10 @@ const TransactionSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    percentage: {
+      type: Number,
+      required: true,
+    },
     isSpend: {
       type: Boolean, // is false, then it's an add
       required: true,

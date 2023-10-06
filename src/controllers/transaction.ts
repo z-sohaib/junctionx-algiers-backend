@@ -90,12 +90,14 @@ export const createOneHandler = async (req: AuthRequest, res: Response) => {
   }
 };
 
-export const updateOneHandler = async (req: Request, res: Response) => {
+export const updateOneHandler = async (req: AuthRequest, res: Response) => {
   const { id } = req.params;
+  const { _id } = req.user;
   const { category, date, description, amount, isSpend } = req.body;
 
   const data = await updateTransaction(
     id,
+    _id,
     category,
     date,
     description,

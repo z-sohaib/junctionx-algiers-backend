@@ -1,4 +1,6 @@
 import Transaction from "../models/Transaction.js";
+import User from "../models/User.js";
+import { resetCashWithTransaction } from "./UserService.js";
 
 export const getAllTransactions = async () => {
   try {
@@ -54,12 +56,16 @@ export const createTransaction = async (
   isSpend: boolean
 ) => {
   try {
+    const targetUser = await User.findById(userId);
     const transaction = await Transaction.create({
       user: userId,
       category: categoryId,
       description,
       date,
       amount,
+      percentage: isSpend
+        ? -((amount * 100) / targetUser.cash)
+        : (amount * 100) / targetUser.cash,
       isSpend,
     });
     return {
@@ -77,6 +83,7 @@ export const createTransaction = async (
 
 export const updateTransaction = async (
   id: string,
+  userId: string,
   categoryId: string,
   date: number | null,
   description: string,
@@ -84,11 +91,15 @@ export const updateTransaction = async (
   isSpend: boolean
 ) => {
   try {
+    const targetUser = await resetCashWithTransaction(userId, id);
     const updatedTransaction = await Transaction.findByIdAndUpdate(id, {
       date,
       category: categoryId,
       description,
       amount,
+      percentage: isSpend
+        ? -((amount * 100) / targetUser.data.cash)
+        : (amount * 100) / targetUser.data.cash,
       isSpend,
     });
     return {

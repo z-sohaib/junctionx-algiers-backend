@@ -1,3 +1,4 @@
+import Transaction from "../models/Transaction.js";
 import User from "../models/User.js";
 
 export const getAllUsers = async () => {
@@ -97,6 +98,33 @@ export const subFromTotalCash = async (id: string, amount: number) => {
     return {
       success: true,
       data: user,
+    };
+  } catch (err) {
+    console.log(err.message);
+    return {
+      success: false,
+      data: err.message,
+    };
+  }
+};
+
+export const resetCashWithTransaction = async (
+  id: string,
+  transactionId: string
+) => {
+  try {
+    const targetUser = await User.findById(id);
+    const targetTransaction = await Transaction.findById(transactionId);
+
+    targetUser.cash = targetTransaction.isSpend
+      ? targetUser.cash + targetTransaction.amount
+      : targetUser.cash - targetTransaction.amount;
+
+    await targetUser.save();
+
+    return {
+      success: true,
+      data: targetUser,
     };
   } catch (err) {
     console.log(err.message);
