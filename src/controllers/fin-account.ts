@@ -6,6 +6,7 @@ import {
   createFinancialAccount,
   updateFinancialAccount,
   deleteFinancialAccount,
+  getUserFinancialAccounts,
 } from "../services/FinancialAccountService.js";
 import { UserInterface } from "../models/User.js";
 
@@ -19,6 +20,17 @@ export const getAllHandler = async (req: Request, res: Response) => {
     success: true,
     message: "Financial Accounts fetched successfully",
     data: financialAccounts,
+  });
+};
+
+export const getSpecificUserHandler = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  const userFinancialAccounts = await getUserFinancialAccounts(id);
+  res.status(200).json({
+    success: true,
+    message: "User Financial Accounts fetched successfully",
+    data: userFinancialAccounts,
   });
 };
 

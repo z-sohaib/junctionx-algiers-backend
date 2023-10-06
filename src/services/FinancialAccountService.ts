@@ -10,6 +10,16 @@ export const getAllFinancialAccounts = async () => {
   }
 };
 
+export const getUserFinancialAccounts = async (userId: string) => {
+  try {
+    const userFinancialAccounts = await FinancialAccount.find({ user: userId });
+    return userFinancialAccounts;
+  } catch (err) {
+    console.log(err.message);
+    return null;
+  }
+};
+
 export const getFinancialAccountById = async (id: string) => {
   try {
     const financialAccount = await FinancialAccount.findById(id);
