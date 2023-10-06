@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { loginUser, registerUser } from "../services/AuthService";
+import { loginUser, registerUser } from "../services/AuthService.js";
 import {
   validateUser,
   validateUserLogin,
-} from "../validations/inputValidation";
-import { generateToken } from "../utils/jwt";
+} from "../validations/inputValidation.js";
+import { generateToken } from "../utils/jwt.js";
 
 export const loginHandler = async (req: Request, res: Response) => {
   const { email, password } = req.body;

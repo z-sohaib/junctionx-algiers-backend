@@ -2,9 +2,9 @@ import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 import { merge, get } from "lodash";
 
-import { getUserByEmail } from "../services/UserService";
-import User, { UserInterface } from "../models/User";
-import { verifyToken } from "../utils/jwt";
+import { getUserByEmail } from "../services/UserService.js";
+import User, { UserInterface } from "../models/User.js";
+import { verifyToken } from "../utils/jwt.js";
 
 interface AuthRequest extends Request {
   user: UserInterface;

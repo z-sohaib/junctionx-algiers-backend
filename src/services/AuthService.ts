@@ -1,7 +1,7 @@
-import User from "../models/User";
+import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
-import { getUserByEmail } from "./UserService";
+import { getUserByEmail } from "./UserService.js";
 
 export const loginUser = async ({ email, password }) => {
   try {

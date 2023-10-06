@@ -5,8 +5,8 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
-import ConnectDB from "./src/utils/db";
-import router from "./src/routes";
+import ConnectDB from "./src/utils/db.js";
+import router from "./src/routes/index.js";
 
 const __filename = fileURLToPath(import.meta.url);
 

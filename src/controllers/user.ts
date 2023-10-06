@@ -1,4 +1,4 @@
-import { getAllUsers, getUserById } from "../services/UserService";
+import { getAllUsers, getUserById } from "../services/UserService.js";
 
 export const getAllHandler = async (req, res) => {
   const users = await getAllUsers();
