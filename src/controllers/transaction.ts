@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 
 import {
   getAllTransactions,
+  getTodayTransactions,
   getTransactionById,
   createTransaction,
   updateTransaction,
@@ -20,6 +21,23 @@ export const getAllHandler = async (req: Request, res: Response) => {
     message: "Transactions fetched successfully",
     data: transactions,
   });
+};
+
+export const getTodayHandler = async (req: Request, res: Response) => {
+  const todayTransactions = await getTodayTransactions();
+  if (todayTransactions) {
+    res.status(200).json({
+      success: true,
+      message: "Transactions fetched successfully",
+      data: todayTransactions,
+    });
+  } else {
+    res.status(200).json({
+      success: true,
+      message: "No Transactions for Today",
+      data: [],
+    });
+  }
 };
 
 export const getOneHandler = async (req: Request, res: Response) => {

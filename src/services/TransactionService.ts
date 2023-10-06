@@ -10,6 +10,31 @@ export const getAllTransactions = async () => {
   }
 };
 
+export const getTodayTransactions = async () => {
+  try {
+    // Get the current date
+    const currentDate = new Date();
+
+    // Create a date range for the current day (start of the day to end of the day)
+    const startOfDay = new Date(currentDate);
+    startOfDay.setHours(0, 0, 0, 0);
+
+    const endOfDay = new Date(currentDate);
+    endOfDay.setHours(23, 59, 59, 999);
+
+    const todayTransactions = await Transaction.find({
+      date: {
+        $gte: startOfDay,
+        $lte: endOfDay,
+      },
+    });
+    return todayTransactions;
+  } catch (err) {
+    console.log(err.message);
+    return null;
+  }
+};
+
 export const getTransactionById = async (id: string) => {
   try {
     const transaction = await Transaction.findById(id);
