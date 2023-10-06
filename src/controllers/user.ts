@@ -36,9 +36,24 @@ export const getOneHandler = async (req: Request, res: Response) => {
 
 export const updateOneHandler = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { name, email, telephone } = req.body;
+  const {
+    name,
+    email,
+    telephone,
+    monthlyAverageSaving,
+    unstableSalary,
+    salary,
+  } = req.body;
 
-  const data = await updateUser(id, name, email, telephone);
+  const data = await updateUser(
+    id,
+    name,
+    email,
+    telephone,
+    monthlyAverageSaving,
+    unstableSalary,
+    salary
+  );
   if (!data.success) {
     res.status(400).json({
       success: true,

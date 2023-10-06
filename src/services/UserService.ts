@@ -35,13 +35,19 @@ export const updateUser = async (
   id: string,
   name: string | null,
   email: string | null,
-  telephone: string | null
+  telephone: string | null,
+  monthlyAverageSaving: number | null,
+  unstableSalary: boolean | null,
+  salary: number | null
 ) => {
   try {
     const updatedUser = await User.findByIdAndUpdate(id, {
       name,
       email,
       telephone,
+      monthlyAverageSaving,
+      unstableSalary,
+      salary,
     });
     return {
       success: true,

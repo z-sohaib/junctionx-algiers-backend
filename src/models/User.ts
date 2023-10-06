@@ -10,6 +10,7 @@ export interface UserInterface {
   role: string;
   isVerified: boolean;
   verificationToken: string;
+  connectedDevices: [string];
 }
 
 const UserSchema = new mongoose.Schema(
@@ -52,6 +53,19 @@ const UserSchema = new mongoose.Schema(
     cash: {
       type: Number,
       required: true,
+      default: 0,
+    },
+    monthlyAverageSaving: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    unstableSalary: {
+      type: Boolean,
+      default: false,
+    },
+    salary: {
+      type: Number,
       default: 0,
     },
     fcmToken: {
