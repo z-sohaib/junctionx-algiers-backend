@@ -1,6 +1,16 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 
+export interface UserInterface {
+  name: string;
+  telephone: string;
+  email: string;
+  password: string;
+  role: string;
+  isVerified: boolean;
+  verificationToken: string;
+}
+
 const UserSchema = new mongoose.Schema(
   {
     name: {
