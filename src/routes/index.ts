@@ -4,6 +4,7 @@ import auth from "./auth.js";
 import users from "./users.js";
 import expenseCategories from "./expense-categories.js";
 import recommendations from "./recommendations.js";
+import logs from "./logs.js";
 
 const router = Router();
 
@@ -12,6 +13,7 @@ export default (): Router => {
   users(router);
   expenseCategories(router);
   recommendations(router);
+  logs(router);
 
   return router;
 };
