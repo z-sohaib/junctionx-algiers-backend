@@ -54,6 +54,14 @@ const UserSchema = new mongoose.Schema(
       required: true,
       default: 0,
     },
+    fcmToken: {
+      type: String,
+      default: null,
+    },
+    connectedDevices: {
+      type: [String],
+      default: [],
+    },
   },
   {
     timestamps: true,
