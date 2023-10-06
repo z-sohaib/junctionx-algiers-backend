@@ -10,9 +10,9 @@ import {
 import { protect } from "../middlewares/auth.js";
 
 export default (router: Router) => {
-  router.get("/expense-categories", getAllHandler);
-  router.get("/expense-categories/:id", getOneHandler);
-  router.post("/expense-categories/", protect, createOneHandler);
-  router.put("/expense-categories/:id", updateOneHandler);
-  router.delete("/expense-categories/:id", deleteOneHandler);
+  router.get("/recommendations", getAllHandler);
+  router.get("/recommendations/:id", getOneHandler);
+  router.post("/recommendations/", protect, createOneHandler);
+  router.put("/recommendations/:id", updateOneHandler);
+  router.delete("/recommendations/:id", deleteOneHandler);
 };
