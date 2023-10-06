@@ -2,6 +2,10 @@ import mongoose from "mongoose";
 
 const TransactionSchema = new mongoose.Schema(
   {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
     date: {
       type: Date,
       required: true,
@@ -14,13 +18,9 @@ const TransactionSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    sender: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
-    receiver: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+    isSpend: {
+      type: Boolean, // is false, then it's an add
+      required: true,
     },
   },
   {
