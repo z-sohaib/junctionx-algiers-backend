@@ -1,9 +1,10 @@
-import express, { Application, NextFunction, Request, Response } from "express";
-import { config } from "dotenv";
-import morgan from "morgan";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+
+import express, { Application, NextFunction, Request, Response } from "express";
+import { config } from "dotenv";
+import morgan from "morgan";
 
 import ConnectDB from "./src/config/db.js";
 import router from "./src/routes/index.js";

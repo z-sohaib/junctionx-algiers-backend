@@ -1,6 +1,7 @@
+import path from "path";
+
 import hbs from "nodemailer-express-handlebars";
 import nodemailer from "nodemailer";
-import path from "path";
 
 let transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",

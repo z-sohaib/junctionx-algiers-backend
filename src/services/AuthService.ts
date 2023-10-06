@@ -1,6 +1,6 @@
-import User from "../models/User.js";
 import bcrypt from "bcrypt";
-import crypto from "crypto";
+
+import User from "../models/User.js";
 import { getUserByEmail } from "./UserService.js";
 import { generateCode } from "../utils/math.js";
 
