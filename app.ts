@@ -7,7 +7,6 @@ import { fileURLToPath } from "url";
 
 import ConnectDB from "./src/config/db.js";
 import router from "./src/routes/index.js";
-import { generateCode } from "./src/utils/math.js";
 
 const __filename = fileURLToPath(import.meta.url);
 
