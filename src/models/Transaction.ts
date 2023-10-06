@@ -10,6 +10,10 @@ const TransactionSchema = new mongoose.Schema(
       type: Date,
       required: true,
     },
+    category: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ExpenseCategory",
+    },
     description: {
       type: String,
       required: true,

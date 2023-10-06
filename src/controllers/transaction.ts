@@ -40,11 +40,12 @@ export const getOneHandler = async (req: Request, res: Response) => {
 };
 
 export const createOneHandler = async (req: AuthRequest, res: Response) => {
-  const { date, description, amount, isSpend } = req.body;
+  const { category, date, description, amount, isSpend } = req.body;
   const { _id } = req.user;
 
   const data = await createTransaction(
     _id,
+    category,
     date || Date.now(),
     description,
     amount,
@@ -67,9 +68,16 @@ export const createOneHandler = async (req: AuthRequest, res: Response) => {
 
 export const updateOneHandler = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { date, description, amount, isSpend } = req.body;
+  const { category, date, description, amount, isSpend } = req.body;
 
-  const data = await updateTransaction(id, date, description, amount, isSpend);
+  const data = await updateTransaction(
+    id,
+    category,
+    date,
+    description,
+    amount,
+    isSpend
+  );
   if (!data.success) {
     res.status(400).json({
       success: true,

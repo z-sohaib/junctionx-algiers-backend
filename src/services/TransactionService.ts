@@ -22,6 +22,7 @@ export const getTransactionById = async (id: string) => {
 
 export const createTransaction = async (
   userId: string,
+  categoryId: string,
   date: number | null,
   description: string,
   amount: number,
@@ -29,8 +30,9 @@ export const createTransaction = async (
 ) => {
   try {
     const transaction = await Transaction.create({
-      description,
       user: userId,
+      category: categoryId,
+      description,
       date,
       amount,
       isSpend,
@@ -50,6 +52,7 @@ export const createTransaction = async (
 
 export const updateTransaction = async (
   id: string,
+  categoryId: string,
   date: number | null,
   description: string,
   amount: number,
@@ -58,6 +61,7 @@ export const updateTransaction = async (
   try {
     const updatedTransaction = await Transaction.findByIdAndUpdate(id, {
       date,
+      category: categoryId,
       description,
       amount,
       isSpend,
