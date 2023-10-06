@@ -5,8 +5,9 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
-import ConnectDB from "./src/utils/db.js";
+import ConnectDB from "./src/config/db.js";
 import router from "./src/routes/index.js";
+import { generateCode } from "./src/utils/math.js";
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -27,7 +28,7 @@ app.use(
 app.use("/", router());
 
 app.get("/", (req: Request, res: Response, next: NextFunction) => {
-  res.send("Welcome to JunctionX Algiers REST API");
+  res.send("Welcome to JunctionX Algiers REST API ");
 });
 
 ConnectDB();
