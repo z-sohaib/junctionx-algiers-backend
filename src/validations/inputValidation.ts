@@ -1,10 +1,9 @@
-export const validateUser = ({ name, telephone, email, password }) => {
+export const validateUser = ({ telephone, email, password }) => {
   const isValidPassword = validatePassword(password);
   const isValidEmail = validateEmail(email);
   const isValidTelephone = validateTelephone(telephone);
-  const isValidName = validateName(name);
 
-  return isValidName && isValidEmail && isValidTelephone && isValidPassword;
+  return isValidEmail && isValidTelephone && isValidPassword;
 };
 
 export const validateUserLogin = ({ email, password }) => {
@@ -31,10 +30,4 @@ const validateTelephone = (telephone) => {
     /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
   const isValidTelephone = telephoneRegex.test(telephone);
   return isValidTelephone;
-};
-
-const validateName = (name) => {
-  const nameRegex = /^[a-zA-Z]{3,}$/;
-  const isValidName = nameRegex.test(name);
-  return isValidName;
 };

@@ -20,18 +20,18 @@ export const loginHandler = async (req: Request, res: Response) => {
   }
 
   // pass the email and password to the login service
-  const user = await loginUser({ email, password });
+  const data = await loginUser({ email, password });
 
-  if (!user) {
+  if (!data.success) {
     return res.status(400).json({
       success: false,
-      message: "Incorrect email or password",
+      message: data.data,
       data: null,
     });
   }
 
   // generate a token
-  const token = generateToken(user);
+  const token = generateToken(data.data);
 
   // send the token to the client
   return res.status(200).json({
@@ -44,7 +44,7 @@ export const loginHandler = async (req: Request, res: Response) => {
 export const registerHandler = async (req: Request, res: Response) => {
   const { name, telephone, email, password } = req.body;
   // pass the username, email, and password to the validate function
-  const isValid = validateUser({ name, telephone, email, password });
+  const isValid = validateUser({ telephone, email, password });
 
   if (!isValid) {
     return res.status(400).json({
@@ -56,23 +56,23 @@ export const registerHandler = async (req: Request, res: Response) => {
 
   // pass the username, email, and password to the register service
 
-  const user = await registerUser({ name, telephone, email, password });
+  const data = await registerUser({ name, telephone, email, password });
 
-  if (!user) {
+  if (!data.success) {
     return res.status(400).json({
       success: false,
-      message: "User already exists",
+      message: data.data,
       data: null,
     });
   }
 
   // generate a token
-  const token = generateToken(user);
+  const token = generateToken(data.data);
 
   // send the token to the client
   return res.status(200).json({
     success: true,
-    message: "User registered successfully",
+    message: "User registered successfully, waiting for verification...",
     data: token,
   });
 };

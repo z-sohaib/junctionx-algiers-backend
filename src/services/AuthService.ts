@@ -2,22 +2,34 @@ import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
 import { getUserByEmail } from "./UserService.js";
+import { generateCode } from "../utils/math.js";
 
 export const loginUser = async ({ email, password }) => {
   try {
     const user = await getUserByEmail(email);
     if (!user) {
-      return null;
+      return {
+        success: false,
+        data: "User Does Not Exist",
+      };
     }
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return null;
-    }
+    if (!isMatch)
+      return {
+        success: false,
+        data: "Incorrect Password",
+      };
 
-    return user;
+    return {
+      success: true,
+      data: user,
+    };
   } catch (err) {
     console.log(err.message);
-    return null;
+    return {
+      success: false,
+      data: err.message,
+    };
   }
 };
 
@@ -27,11 +39,14 @@ export const registerUser = async ({ name, telephone, email, password }) => {
     let user = await getUserByEmail(email);
     // if the user exists, return null
     if (user) {
-      return null;
+      return {
+        success: false,
+        data: "User Already Exists",
+      };
     }
 
     // generate a verification token to use in the account verification phase
-    const token = crypto.randomBytes(20).toString("hex");
+    const token = generateCode(4);
 
     // create a new user
     user = new User({
@@ -44,9 +59,15 @@ export const registerUser = async ({ name, telephone, email, password }) => {
     // save the user
     await user.save();
     // return the user
-    return user;
+    return {
+      success: true,
+      data: user,
+    };
   } catch (err) {
     console.log(err.message);
-    return null;
+    return {
+      success: false,
+      data: err.message,
+    };
   }
 };

@@ -37,6 +37,7 @@ const UserSchema = new mongoose.Schema(
     role: {
       type: String,
       required: true,
+      default: "normal",
     },
     isVerified: {
       type: Boolean,
@@ -63,7 +64,7 @@ UserSchema.pre("save", async function (next) {
     next();
   }
 
-  const salt = await bcrypt.genSal(10);
+  const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
 });
 

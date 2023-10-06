@@ -16,6 +16,8 @@ config();
 
 const app: Application = express();
 
+app.use(express.json());
+
 app.use(
   morgan("combined", {
     stream: fs.createWriteStream(path.join(__dirname, "logger/access.log"), {
