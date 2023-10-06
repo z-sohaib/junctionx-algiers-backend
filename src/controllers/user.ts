@@ -4,6 +4,7 @@ import {
   deleteUser,
   getAllUsers,
   getUserById,
+  subscribeDeviceToUser,
   updateUser,
 } from "../services/UserService.js";
 
@@ -67,7 +68,28 @@ export const deleteOneHandler = async (req: Request, res: Response) => {
     res.status(200).json({
       success: true,
       message: "User deleted successfully",
-      data: { user: data.data },
+      data: data.data,
+    });
+  }
+};
+
+export const subscribeDeviceHandler = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { device } = req.body;
+
+  const data = await subscribeDeviceToUser(id, device);
+
+  if (!data.success) {
+    res.status(400).json({
+      success: true,
+      message: data.data,
+      data: null,
+    });
+  } else {
+    res.status(200).json({
+      success: true,
+      message: "A new device is subscribed to this user",
+      data: data.data,
     });
   }
 };

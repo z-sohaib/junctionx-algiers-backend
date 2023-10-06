@@ -134,3 +134,23 @@ export const resetCashWithTransaction = async (
     };
   }
 };
+
+export const subscribeDeviceToUser = async (id: string, device: string) => {
+  try {
+    const targetUser = await User.findById(id);
+    targetUser.connectedDevices.push(device);
+
+    await targetUser.save();
+
+    return {
+      success: true,
+      data: targetUser,
+    };
+  } catch (err) {
+    console.log(err.message);
+    return {
+      success: false,
+      data: err.message,
+    };
+  }
+};
