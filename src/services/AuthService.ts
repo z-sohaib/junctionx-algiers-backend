@@ -61,8 +61,42 @@ export const registerUser = async ({ name, telephone, email, password }) => {
     // return the user
     return {
       success: true,
-      data: user,
+      data: { user, token },
     };
+  } catch (err) {
+    console.log(err.message);
+    return {
+      success: false,
+      data: err.message,
+    };
+  }
+};
+
+export const verifyUser = async ({ code, email }) => {
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return {
+        success: false,
+        data: "User Not Found",
+      };
+    }
+
+    if (user.verificationToken === code) {
+      user.isVerified = true;
+      user.verificationToken = null;
+      await user.save();
+      return {
+        success: true,
+        data: user,
+      };
+    } else {
+      return {
+        success: false,
+        data: "Invalid Verification Code",
+      };
+    }
   } catch (err) {
     console.log(err.message);
     return {

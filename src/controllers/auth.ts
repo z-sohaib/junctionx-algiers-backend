@@ -1,10 +1,15 @@
 import { Request, Response } from "express";
-import { loginUser, registerUser } from "../services/AuthService.js";
+import {
+  loginUser,
+  registerUser,
+  verifyUser,
+} from "../services/AuthService.js";
 import {
   validateUser,
   validateUserLogin,
 } from "../validations/inputValidation.js";
 import { generateToken } from "../utils/jwt.js";
+import { sendEmail } from "../services/EmailService.js";
 
 export const loginHandler = async (req: Request, res: Response) => {
   const { email, password } = req.body;
@@ -66,13 +71,39 @@ export const registerHandler = async (req: Request, res: Response) => {
     });
   }
 
+  await sendEmail(email, "Welcome to 9PM", "confirmation", {
+    token: data.data.token,
+    name,
+  });
+
+  // send the token to the client
+  return res.status(200).json({
+    success: true,
+    message: "User registered successfully, waiting for verification...",
+    data: data.data.user,
+  });
+};
+
+export const verifyHandler = async (req: Request, res: Response) => {
+  const { email, code } = req.body;
+
+  const data = await verifyUser({ code, email });
+
+  if (!data.success) {
+    return res.status(400).json({
+      success: false,
+      message: data.data,
+      data: null,
+    });
+  }
+
   // generate a token
   const token = generateToken(data.data);
 
   // send the token to the client
   return res.status(200).json({
     success: true,
-    message: "User registered successfully, waiting for verification...",
+    message: "User verified successfully",
     data: token,
   });
 };
