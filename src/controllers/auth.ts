@@ -44,7 +44,10 @@ export const loginHandler = async (req: Request, res: Response) => {
   return res.status(200).json({
     success: true,
     message: "User logged in successfully",
-    data: token,
+    data: {
+      user: data.data,
+      token,
+    },
   });
 };
 
@@ -106,7 +109,10 @@ export const verifyHandler = async (req: Request, res: Response) => {
   return res.status(200).json({
     success: true,
     message: "User verified successfully",
-    data: token,
+    data: {
+      user: data.data,
+      token,
+    },
   });
 };
 
@@ -131,6 +137,9 @@ export const googleLoginHandler = async (req: Request, res: Response) => {
   return res.status(200).json({
     success: true,
     message: "User Connected Successfully with Google",
-    data: token,
+    data: {
+      user: data.data,
+      token,
+    },
   });
 };
