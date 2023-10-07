@@ -1,6 +1,6 @@
 import admin from "firebase-admin";
 
-import serviceAccount from "./serviceAccountKey.json";
+import serviceAccount from "./serviceAccountKey.json" assert { type: "json" };
 
 let private_key = process.env.private_key.replace(/\\n/gm, "\n");
 const firebase_params = {
