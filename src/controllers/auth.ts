@@ -19,15 +19,15 @@ import { sendEmail } from "../services/EmailService.js";
 export const loginHandler = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
-  const isValid = validateUserLogin({ email, password });
+  // const isValid = validateUserLogin({ email, password });
 
-  if (!isValid) {
-    return res.status(400).json({
-      success: false,
-      message: "Invalid credentials",
-      data: null,
-    });
-  }
+  // if (!isValid) {
+  //   return res.status(400).json({
+  //     success: false,
+  //     message: "Invalid credentials",
+  //     data: null,
+  //   });
+  // }
 
   // pass the email and password to the login service
   const data = await loginUser({ email, password });
@@ -60,15 +60,15 @@ export const loginHandler = async (req: Request, res: Response) => {
 export const registerHandler = async (req: Request, res: Response) => {
   const { name, telephone, email, password } = req.body;
   // pass the username, email, and password to the validate function
-  const isValid = validateUser({ telephone, email, password });
+  // const isValid = validateUser({ telephone, email, password });
 
-  if (!isValid) {
-    return res.status(400).json({
-      success: false,
-      message: "Please provide a valid username, email, and password",
-      data: null,
-    });
-  }
+  // if (!isValid) {
+  //   return res.status(400).json({
+  //     success: false,
+  //     message: "Please provide a valid username, email, and password",
+  //     data: null,
+  //   });
+  // }
 
   // pass the username, email, and password to the register service
 
