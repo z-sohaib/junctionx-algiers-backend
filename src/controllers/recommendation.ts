@@ -13,6 +13,9 @@ interface AuthRequest extends Request {
   user: UserInterface;
 }
 
+// @desc    Get All Financial Recommendations
+// @route   GET /recommendations/
+// @access  Public
 export const getAllHandler = async (req: Request, res: Response) => {
   const financialRecommendations = await getAllFinancialRecommendations();
   res.status(200).json({
@@ -22,6 +25,9 @@ export const getAllHandler = async (req: Request, res: Response) => {
   });
 };
 
+// @desc    Get One Financial Recommendation By ID
+// @route   GET /recommendations/:id
+// @access  Public
 export const getOneHandler = async (req: Request, res: Response) => {
   const { id } = req.params;
   const financialRecommendation = await getFinancialRecommendationById(id);
@@ -39,6 +45,9 @@ export const getOneHandler = async (req: Request, res: Response) => {
   });
 };
 
+// @desc    Create a new Financial Recommendation
+// @route   POST /recommendations/
+// @access  Private
 export const createOneHandler = async (req: AuthRequest, res: Response) => {
   const { text } = req.body;
   const { _id } = req.user;
@@ -59,6 +68,9 @@ export const createOneHandler = async (req: AuthRequest, res: Response) => {
   }
 };
 
+// @desc    Update an Existing Financial Recommendation
+// @route   PUT /recommendations/:id
+// @access  Public
 export const updateOneHandler = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { text } = req.body;
@@ -79,6 +91,9 @@ export const updateOneHandler = async (req: Request, res: Response) => {
   }
 };
 
+// @desc    Delete an Existing Financial Recommendation
+// @route   DELETE /recommendations/:id
+// @access  Public
 export const deleteOneHandler = async (req: Request, res: Response) => {
   const { id } = req.params;
 

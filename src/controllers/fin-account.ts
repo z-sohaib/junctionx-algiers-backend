@@ -14,6 +14,9 @@ interface AuthRequest extends Request {
   user: UserInterface;
 }
 
+// @desc    Get All Financial Accounts
+// @route   GET /fin-accounts/
+// @access  Public
 export const getAllHandler = async (req: Request, res: Response) => {
   const financialAccounts = await getAllFinancialAccounts();
   res.status(200).json({
@@ -23,6 +26,9 @@ export const getAllHandler = async (req: Request, res: Response) => {
   });
 };
 
+// @desc    Get a Specific User's Financial Account
+// @route   GET /fin-accounts/user/:id
+// @access  Public
 export const getSpecificUserHandler = async (req: Request, res: Response) => {
   const { id } = req.params;
 
@@ -34,6 +40,9 @@ export const getSpecificUserHandler = async (req: Request, res: Response) => {
   });
 };
 
+// @desc    Get One Financial Account By ID
+// @route   GET /fin-accounts/:id
+// @access  Public
 export const getOneHandler = async (req: Request, res: Response) => {
   const { id } = req.params;
   const financialAccount = await getFinancialAccountById(id);
@@ -51,6 +60,9 @@ export const getOneHandler = async (req: Request, res: Response) => {
   });
 };
 
+// @desc    Create a new Financial Account
+// @route   POST /fin-accounts/
+// @access  Private
 export const createOneHandler = async (req: AuthRequest, res: Response) => {
   const { bank, type, number, name, expiration, ccv } = req.body;
   const { _id } = req.user;
@@ -79,6 +91,9 @@ export const createOneHandler = async (req: AuthRequest, res: Response) => {
   }
 };
 
+// @desc    Update an Existing Financial Account
+// @route   PUT /fin-accounts/:id
+// @access  Public
 export const updateOneHandler = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { bank, type, number, name, expiration, ccv } = req.body;
@@ -107,6 +122,9 @@ export const updateOneHandler = async (req: Request, res: Response) => {
   }
 };
 
+// @desc    Delete an Existing Financial Account
+// @route   DELETE /fin-accounts/:id
+// @access  Public
 export const deleteOneHandler = async (req: Request, res: Response) => {
   const { id } = req.params;
 

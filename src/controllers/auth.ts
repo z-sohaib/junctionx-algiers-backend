@@ -13,6 +13,9 @@ import {
 import { generateToken } from "../utils/jwt.js";
 import { sendEmail } from "../services/EmailService.js";
 
+// @desc    Login to an existing account
+// @route   POST /auth/login
+// @access  Public
 export const loginHandler = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
@@ -51,6 +54,9 @@ export const loginHandler = async (req: Request, res: Response) => {
   });
 };
 
+// @desc    Register a new account
+// @route   POST /auth/register
+// @access  Public
 export const registerHandler = async (req: Request, res: Response) => {
   const { name, telephone, email, password } = req.body;
   // pass the username, email, and password to the validate function
@@ -89,6 +95,9 @@ export const registerHandler = async (req: Request, res: Response) => {
   });
 };
 
+// @desc    Verify an unverified account
+// @route   PUT /auth/verify
+// @access  Public
 export const verifyHandler = async (req: Request, res: Response) => {
   const { email, code } = req.body;
 
@@ -116,6 +125,9 @@ export const verifyHandler = async (req: Request, res: Response) => {
   });
 };
 
+// @desc    Login/Register an account using Google OAuth
+// @route   POST /auth/google
+// @access  Public
 export const googleLoginHandler = async (req: Request, res: Response) => {
   const { email, telephone, name } = req.body;
   const { oauth } = req.headers;

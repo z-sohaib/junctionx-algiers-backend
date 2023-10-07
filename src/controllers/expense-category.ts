@@ -8,6 +8,9 @@ import {
   updateExpenseCategory,
 } from "../services/ExpenseCategoryService.js";
 
+// @desc    Get All Expense Categories
+// @route   GET /expense-categories/
+// @access  Public
 export const getAllHandler = async (req: Request, res: Response) => {
   const expenseCategories = await getAllExpenseCategories();
   res.status(200).json({
@@ -17,6 +20,9 @@ export const getAllHandler = async (req: Request, res: Response) => {
   });
 };
 
+// @desc    Get One Expense Category By ID
+// @route   GET /expense-categories/:id
+// @access  Public
 export const getOneHandler = async (req: Request, res: Response) => {
   const { id } = req.params;
   const expenseCategory = await getExpenseCategoryById(id);
@@ -34,6 +40,9 @@ export const getOneHandler = async (req: Request, res: Response) => {
   });
 };
 
+// @desc    Create a new Expense Categoriy
+// @route   POST /expense-categories/
+// @access  Public
 export const createOneHandler = async (req: Request, res: Response) => {
   const { name } = req.body;
 
@@ -53,6 +62,9 @@ export const createOneHandler = async (req: Request, res: Response) => {
   }
 };
 
+// @desc    Update an Existing Expense Category
+// @route   PUT /expense-categories/:id
+// @access  Public
 export const updateOneHandler = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { name } = req.body;
@@ -73,6 +85,9 @@ export const updateOneHandler = async (req: Request, res: Response) => {
   }
 };
 
+// @desc    Delete an Existing Expense Category
+// @route   DELETE /expense-categories/:id
+// @access  Public
 export const deleteOneHandler = async (req: Request, res: Response) => {
   const { id } = req.params;
 

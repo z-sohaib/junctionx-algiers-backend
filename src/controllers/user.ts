@@ -8,6 +8,9 @@ import {
   updateUser,
 } from "../services/UserService.js";
 
+// @desc    Get All Users
+// @route   GET /users/
+// @access  Public
 export const getAllHandler = async (req: Request, res: Response) => {
   const users = await getAllUsers();
   res.status(200).json({
@@ -17,6 +20,9 @@ export const getAllHandler = async (req: Request, res: Response) => {
   });
 };
 
+// @desc    Get One User By ID
+// @route   GET /users/:id
+// @access  Public
 export const getOneHandler = async (req: Request, res: Response) => {
   const { id } = req.params;
   const user = await getUserById(id);
@@ -34,6 +40,9 @@ export const getOneHandler = async (req: Request, res: Response) => {
   });
 };
 
+// @desc    Update an Existing User
+// @route   PUT /users/:id
+// @access  Public
 export const updateOneHandler = async (req: Request, res: Response) => {
   const { id } = req.params;
   const {
@@ -69,6 +78,9 @@ export const updateOneHandler = async (req: Request, res: Response) => {
   }
 };
 
+// @desc    Delete an Existing User
+// @route   DELETE /users/:id
+// @access  Public
 export const deleteOneHandler = async (req: Request, res: Response) => {
   const { id } = req.params;
 
@@ -88,6 +100,9 @@ export const deleteOneHandler = async (req: Request, res: Response) => {
   }
 };
 
+// @desc    Subscribe a Device to an Existing User
+// @route   PUT /users/subscribe/:id
+// @access  Public
 export const subscribeDeviceHandler = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { device } = req.body;

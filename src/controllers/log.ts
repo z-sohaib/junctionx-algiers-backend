@@ -13,6 +13,9 @@ interface AuthRequest extends Request {
   user: UserInterface;
 }
 
+// @desc    Get All Security Logs
+// @route   GET /logs/
+// @access  Public
 export const getAllHandler = async (req: Request, res: Response) => {
   const securityLogs = await getAllSecurityLogs();
   res.status(200).json({
@@ -22,6 +25,9 @@ export const getAllHandler = async (req: Request, res: Response) => {
   });
 };
 
+// @desc    Get One Security Log By ID
+// @route   GET /logs/:id
+// @access  Public
 export const getOneHandler = async (req: Request, res: Response) => {
   const { id } = req.params;
   const securityLog = await getSecurityLogById(id);
@@ -39,6 +45,9 @@ export const getOneHandler = async (req: Request, res: Response) => {
   });
 };
 
+// @desc    Create a new Security Log
+// @route   POST /logs/
+// @access  Private
 export const createOneHandler = async (req: AuthRequest, res: Response) => {
   const { text } = req.body;
   const { _id } = req.user;
@@ -59,6 +68,9 @@ export const createOneHandler = async (req: AuthRequest, res: Response) => {
   }
 };
 
+// @desc    Update an Existing Security Log
+// @route   PUT /logs/:id
+// @access  Public
 export const updateOneHandler = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { text } = req.body;
@@ -79,6 +91,9 @@ export const updateOneHandler = async (req: Request, res: Response) => {
   }
 };
 
+// @desc    Delete an Existing Security Log
+// @route   DELETE /logs/:id
+// @access  Public
 export const deleteOneHandler = async (req: Request, res: Response) => {
   const { id } = req.params;
 

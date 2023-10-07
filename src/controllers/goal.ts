@@ -13,6 +13,9 @@ interface AuthRequest extends Request {
   user: UserInterface;
 }
 
+// @desc    Get All Goals
+// @route   GET /goals/
+// @access  Public
 export const getAllHandler = async (req: Request, res: Response) => {
   const goals = await getAllGoals();
   res.status(200).json({
@@ -22,6 +25,9 @@ export const getAllHandler = async (req: Request, res: Response) => {
   });
 };
 
+// @desc    Get One Goal By ID
+// @route   GET /goals/:id
+// @access  Public
 export const getOneHandler = async (req: Request, res: Response) => {
   const { id } = req.params;
   const goal = await getGoalById(id);
@@ -39,6 +45,9 @@ export const getOneHandler = async (req: Request, res: Response) => {
   });
 };
 
+// @desc    Create a new Goal
+// @route   POST /goals/
+// @access  Private
 export const createOneHandler = async (req: AuthRequest, res: Response) => {
   const { goal, price, tosave } = req.body;
   const { _id } = req.user;
@@ -59,6 +68,9 @@ export const createOneHandler = async (req: AuthRequest, res: Response) => {
   }
 };
 
+// @desc    Update an Existing Goal
+// @route   PUT /goals/:id
+// @access  Public
 export const updateOneHandler = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { goal, price, tosave } = req.body;
@@ -79,6 +91,9 @@ export const updateOneHandler = async (req: Request, res: Response) => {
   }
 };
 
+// @desc    Delete an Existing Goal
+// @route   DELETE /goals/:id
+// @access  Public
 export const deleteOneHandler = async (req: Request, res: Response) => {
   const { id } = req.params;
 
