@@ -1,8 +1,9 @@
+import path from "path";
+import fs from "fs";
+
 import { Request, Response } from "express";
-const path = require("path");
-const pdf = require("html-pdf-node");
-const hb = require("handlebars");
-const fs = require("fs");
+import hbs from "handlebars";
+import pdf from "html-pdf-node";
 
 import {
   getAllTransactions,
@@ -182,7 +183,7 @@ export const generateTransactionsSummary = async (
   try {
     const { name, email, transactions } = req.body;
     const template = fs.readFileSync("./views/summary.handlebars", "utf-8");
-    const compiled = hb.compile(template);
+    const compiled = hbs.compile(template);
     const data = {
       date: new Date().toISOString().split("T")[0],
       name,
