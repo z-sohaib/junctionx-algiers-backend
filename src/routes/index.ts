@@ -8,6 +8,7 @@ import logs from "./logs.js";
 import financialAccounts from "./fin-accounts.js";
 import transactions from "./transactions.js";
 import goals from "./goals.js";
+import notifications from "./notifications.js";
 
 const router = Router();
 
@@ -20,6 +21,7 @@ export default (): Router => {
   financialAccounts(router);
   transactions(router);
   goals(router);
+  notifications(router);
 
   return router;
 };

@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
 
-import { createNotification } from "../services/NotificationService";
-import { UserInterface } from "../models/User";
-import { sendNotification } from "../utils/notification";
-import Notification from "../models/Notification";
+import {
+  createBroadcastNotification,
+  createNotification,
+} from "../services/NotificationService.js";
+import { UserInterface } from "../models/User.js";
 
 interface AuthRequest extends Request {
   user: UserInterface;
@@ -11,7 +12,7 @@ interface AuthRequest extends Request {
 
 // @desc    Send Notification to One User
 // @route   POST /notifications/send
-// @access  Private
+// @access  Public
 export const createOneHandler = async (req: AuthRequest, res: Response) => {
   const { title, body } = req.body;
   const { _id } = req.user;
@@ -26,7 +27,7 @@ export const createOneHandler = async (req: AuthRequest, res: Response) => {
   } else {
     res.status(200).json({
       success: true,
-      message: "Security Log created successfully",
+      message: "Notification Created created successfully",
       data: data.data,
     });
   }
@@ -34,21 +35,21 @@ export const createOneHandler = async (req: AuthRequest, res: Response) => {
 
 // @desc    Send Notification to All User
 // @route   POST /notifications/sendall
-// @access  Private
-// export const createAllHandler = async (req: AuthRequest, res: Response) => {
-//     const { title, body } = req.body;
-//     const data = await sendNotification(_id, title, body);
-//     if (!data.success) {
-//       res.status(400).json({
-//         success: true,
-//         message: data.data,
-//         data: null,
-//       });
-//     } else {
-//       res.status(200).json({
-//         success: true,
-//         message: "Security Log created successfully",
-//         data: data.data,
-//       });
-//     }
-//   };
+// @access  Public
+export const createAllHandler = async (req: AuthRequest, res: Response) => {
+  const { title, body } = req.body;
+  const data = await createBroadcastNotification(title, body);
+  if (!data.success) {
+    res.status(400).json({
+      success: true,
+      message: data.data,
+      data: null,
+    });
+  } else {
+    res.status(200).json({
+      success: true,
+      message: "Broadcast Notification Created successfully",
+      data: data.data,
+    });
+  }
+};
