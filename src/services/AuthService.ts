@@ -105,3 +105,42 @@ export const verifyUser = async ({ code, email }) => {
     };
   }
 };
+
+export const GoogleLoginUser = async ({ email, telephone, name, secret }) => {
+  try {
+    if (secret === process.env.OauthSecret) {
+      const user = await getUserByEmail(email);
+
+      if (user) {
+        return {
+          success: true,
+          data: user,
+        };
+      } else {
+        const newUser = new User({
+          email,
+          telephone,
+          name,
+          fromGoogle: true,
+        });
+        const savedUser = await newUser.save();
+
+        return {
+          success: true,
+          data: savedUser,
+        };
+      }
+    } else {
+      return {
+        success: false,
+        data: "Unauthorized OAuth",
+      };
+    }
+  } catch (err) {
+    console.log(err.message);
+    return {
+      success: false,
+      data: err.message,
+    };
+  }
+};

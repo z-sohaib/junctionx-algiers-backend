@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 
 import {
+  GoogleLoginUser,
   loginUser,
   registerUser,
   verifyUser,
@@ -105,6 +106,31 @@ export const verifyHandler = async (req: Request, res: Response) => {
   return res.status(200).json({
     success: true,
     message: "User verified successfully",
+    data: token,
+  });
+};
+
+export const googleLoginHandler = async (req: Request, res: Response) => {
+  const { email, telephone, name } = req.body;
+  const { oauth } = req.headers;
+
+  const data = await GoogleLoginUser({ email, telephone, name, secret: oauth });
+
+  if (!data.success) {
+    return res.status(400).json({
+      success: false,
+      message: data.data,
+      data: null,
+    });
+  }
+
+  // generate a token
+  const token = generateToken(data.data);
+
+  // send the token to the client
+  return res.status(200).json({
+    success: true,
+    message: "User Connected Successfully with Google",
     data: token,
   });
 };

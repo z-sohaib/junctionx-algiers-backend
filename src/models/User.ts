@@ -27,9 +27,12 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    fromGoogle: {
+      type: Boolean,
+      default: false,
+    },
     password: {
       type: String,
-      required: true,
     },
     // image: {
     //   type: String,
