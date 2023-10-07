@@ -35,5 +35,8 @@
     "@types/node": "^20.6.3",
     "concurrently": "^8.2.1",
     "typescript": "^5.2.2"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   }
 }
