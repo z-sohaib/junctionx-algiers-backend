@@ -9,11 +9,11 @@
 The Repository for Finvest REST API Made With NodeJS, TypeScript, Express and MongoDB
     <br />
     <br />
-    <a href="https://github.com/z-sohaib/junctionx-algiers-backen">View Demo</a>
+    <a href="https://github.com/z-sohaib/junctionx-algiers-backend">View Demo</a>
     ·
-    <a href="https://github.com/z-sohaib/junctionx-algiers-backen/issues">Report Bug</a>
+    <a href="https://github.com/z-sohaib/junctionx-algiers-backend/issues">Report Bug</a>
     ·
-    <a href="https://github.com/z-sohaib/junctionx-algiers-backen/issues">Request Feature</a>
+    <a href="https://github.com/z-sohaib/junctionx-algiers-backend/issues">Request Feature</a>
   </p>
 </p>
 
