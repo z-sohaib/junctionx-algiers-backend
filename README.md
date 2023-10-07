@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/z-sohaib/junctionx-algiers-backend">
-    <img src="./assets/logo.png" alt="Logo" width="140" height="140">
+    <img src="./assets/logo.png" alt="Logo" width="170" height="140">
   </a>
 
   <h3 align="center"></h3>
