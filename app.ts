@@ -5,6 +5,7 @@ import { fileURLToPath } from "url";
 import express, { Application, NextFunction, Request, Response } from "express";
 import { config } from "dotenv";
 import morgan from "morgan";
+import cors from "cors";
 
 import ConnectDB from "./src/config/db.js";
 import router from "./src/routes/index.js";
@@ -17,6 +18,11 @@ config();
 
 const app: Application = express();
 
+const corsOptions = {
+  origin: "*",
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use(
