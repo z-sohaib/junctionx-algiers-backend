@@ -1,5 +1,5 @@
-const Notification = require("../models/Notification.js");
-const { sendNotificationChannel } = require("../utils/Notification.js");
+import Notification from "../models/Notification.js";
+import { sendNotificationChannel } from "../utils/notification.js";
 
 export const createNotification = async (
   userId: string,
