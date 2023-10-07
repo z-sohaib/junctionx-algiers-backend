@@ -1,7 +1,7 @@
 {
-  "name": "ibn-rochd-university-backend",
+  "name": "junctionx-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "The repository of Finvest REST API",
   "main": "app.js",
   "type": "module",
   "scripts": {
