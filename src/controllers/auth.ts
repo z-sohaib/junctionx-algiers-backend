@@ -48,8 +48,8 @@ export const loginHandler = async (req: Request, res: Response) => {
     success: true,
     message: "User logged in successfully",
     data: {
-      user: data.data,
       token,
+      ...data,
     },
   });
 };
@@ -119,8 +119,8 @@ export const verifyHandler = async (req: Request, res: Response) => {
     success: true,
     message: "User verified successfully",
     data: {
-      user: data.data,
       token,
+      ...data,
     },
   });
 };
