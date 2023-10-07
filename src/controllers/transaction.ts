@@ -1,4 +1,8 @@
 import { Request, Response } from "express";
+const path = require("path");
+const pdf = require("html-pdf-node");
+const hb = require("handlebars");
+const fs = require("fs");
 
 import {
   getAllTransactions,
@@ -164,6 +168,50 @@ export const deleteOneHandler = async (req: Request, res: Response) => {
       success: true,
       message: "Transaction deleted successfully",
       data: data.data,
+    });
+  }
+};
+
+// @desc    Generate Transactions Summary
+// @route   POST /transactions/summary
+// @access  Public
+export const generateTransactionsSummary = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const { name, email, transactions } = req.body;
+    const template = fs.readFileSync("./views/summary.handlebars", "utf-8");
+    const compiled = hb.compile(template);
+    const data = {
+      date: new Date().toISOString().split("T")[0],
+      name,
+      email,
+      transactions,
+      total: transactions
+        ? transactions.reduce((acc, obj) => acc + obj.amount, 0)
+        : 0,
+    };
+    const html = compiled(data);
+    const options = {
+      format: "A4",
+    };
+
+    const file = { content: html };
+
+    const filePath = path.join(__dirname, "/output/transactions_summary.pdf");
+
+    pdf
+      .generatePdf(file, options)
+      .then((pdfBuffer) => {
+        fs.writeFileSync(filePath, pdfBuffer);
+        res.status(200).sendFile(filePath);
+      })
+      .catch((err) => res.send({ error: err.toString() }));
+  } catch (err) {
+    res.json({
+      success: false,
+      message: err.toString(),
     });
   }
 };
